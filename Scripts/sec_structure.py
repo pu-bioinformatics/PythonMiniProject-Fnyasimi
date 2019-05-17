@@ -1,7 +1,7 @@
 #! /bin/python
 
 
-def secondary_structure(path):
+def secondary_structure(path, filename):
     """The function shows the secondary structure and which amino acids belong to a certain helix
     and the helix ID.
     The function only  works with proteins that are not bound to macromolecules or ligands, 

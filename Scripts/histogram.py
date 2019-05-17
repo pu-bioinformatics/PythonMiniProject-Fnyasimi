@@ -1,7 +1,7 @@
 #! /bin/python
 
 
-def aminoacid_histogram():
+def aminoacid_histogram(path):
     """This is a fuction used to draw histograms of the number of amino acids present in a seqience of 
     a given pdb file as an input."""
 

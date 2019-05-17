@@ -1,13 +1,17 @@
 #! bin/python
 
-pdb = "None"
-def menuscreen():
+
+
+def menuscreen(pdb):
     
     """
     Creates the main menu look with all the available options which the program can take.
     Prompts the user to select an option from the available options in the Menu."""
     
-    global opt
+    #global opt
+    
+    #Required module
+    from mainframe import mainframe
     
     # Main line parts
     a = " PDB FILE ANALYZER "
@@ -48,5 +52,5 @@ def menuscreen():
     opt = opt.upper()
     
     # Call the mainframe function which takes in the options and executes them
-    mainframe(opt)
+    mainframe(opt,pdb)
     

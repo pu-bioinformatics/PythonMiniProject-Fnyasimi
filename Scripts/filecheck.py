@@ -33,3 +33,6 @@ def filecheck ():
                 print("The File %s is not a pdb file" %filename)
     else:
         print("The directory does not exist ")
+    
+    
+    return pdb, path, filename

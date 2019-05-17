@@ -1,15 +1,29 @@
 #! /bin/python
 
-def mainframe(opt):
+# Required modules
+
+def mainframe(opt,pdb):
     """
     The function controls what happens when a user selects an option
     Arguments: opt (short form for selected option).
     If the option does not exist it returns to the menu screen"""
     
+    global path, filename
+    
+    #Import required modules
+    from menu import menuscreen
+    from filecheck import filecheck
+    from information import pdb_info
+    from histogram import aminoacid_histogram
+    from sec_structure import secondary_structure
+    from export import pdb_export
+    from exitloop import exitloop
+    
     if opt == 'O': # Open file
         if pdb == "None": # No loaded pdb file
-            filecheck() # Load file
-            menuscreen()
+            pdb, path, filename = filecheck() # Load file
+            #pdb, path, filename = filecheck()
+            menuscreen(pdb)
 
         else: # If there is a loaded file you want to replace 
             print("File %s is loaded, do you want to replace the file?" %pdb)
@@ -17,11 +31,11 @@ def mainframe(opt):
             replace = replace.upper()
             
             if replace == 'Y':
-                filecheck()
-                menuscreen()
+                pdb, path, filename = filecheck()
+                menuscreen(pdb)
             
             if replace == 'N':
-                menuscreen()
+                menuscreen(pdb)
             
             if replace != 'Y' and replace != 'N':
                 replace = input("Invalid option please input Y/N: ")
@@ -32,11 +46,11 @@ def mainframe(opt):
                     replace = replace.upper()
 
                     if replace == 'Y':
-                        filecheck()
-                        menuscreen()
+                        pdb, path, filename = filecheck()
+                        menuscreen(pdb)
                         
                     if replace == 'N':
-                        menuscreen()
+                        menuscreen(pdb)
     else:
         if opt == 'I' or opt == 'H' or opt == 'S' or opt == 'X' or opt == 'Q':
             if pdb == "None":
@@ -48,10 +62,10 @@ def mainframe(opt):
                     new = new.upper()
                     
                     if new == 'Y':
-                        filecheck()
-                        menuscreen()
+                        pdb, path, filename = filecheck()
+                        menuscreen(pdb)
                     if new == 'N':
-                        menuscreen()
+                        menuscreen(pdb)
                         
                     if new != 'Y' and new != 'N':
                         new = input("Invalid option please input Y/N: ")
@@ -62,26 +76,26 @@ def mainframe(opt):
                             new = new.upper()
 
                             if new == 'Y':
-                                filecheck()
-                                menuscreen()
+                                pdb, path, filename = filecheck()
+                                menuscreen(pdb)
 
                             if new == 'N':
-                                menuscreen()
+                                menuscreen(pdb)
             else:
                 if opt == 'I':
                     pdb_info(path) # Information function
-                    menuscreen()
+                    menuscreen(pdb)
                 if opt == 'H':
-                    aminoacid_histogram() # amino histogram function
-                    menuscreen()
+                    aminoacid_histogram(path) # amino histogram function
+                    menuscreen(pdb)
                 if opt == 'S':
-                    secondary_structure(path) # Show secondary structure of a protein
-                    menuscreen()
+                    secondary_structure(path, filename) # Show secondary structure of a protein
+                    menuscreen(pdb)
                 if opt == 'X':
                     pdb_export(path)
-                    menuscreen()
+                    menuscreen(pdb)
                 if opt == 'Q':
                     exitloop() #exit function
         else:
             print("Invalid option entered")
-            menuscreen()
+            menuscreen(pdb)
