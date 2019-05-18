@@ -8,7 +8,7 @@ Contain modules that run the explorer for pdb files.
 Contain different pdb files.
 
 ## Results
-Whers files should be exported to.
+Where pdb files should be exported to.
 
 ## Usage
 To start exploring a pdb file run `pdb_explorer.py`.
