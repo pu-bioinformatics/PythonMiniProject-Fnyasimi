@@ -25,14 +25,18 @@ def filecheck ():
             
             else:
                 print("This is not a pdb file")
+                pdb = "None"
         else:
             extension = filename.split(".")
             if extension[-1] == 'pdb':
                 print("The File %s does not exist" %filename)
+                pdb = "None"
             else:
                 print("The File %s is not a pdb file" %filename)
+                pdb = "None"
     else:
         print("The directory does not exist ")
+        pdb = "None"
     
     
     return pdb, path, filename
