@@ -51,6 +51,15 @@ def pdb_info(path):
         for line in titlelist:
             print(line)
         
+        if len(p_chains) <= 2:
+            chains_title = "CHAINS: " + " and ".join(p_chains) #join all the chains together in the subtitle
+
+        else:
+            chains_title = "CHAINS: " + ", ".join(p_chains[:-1])
+            chains_title = chains_title + " and " + "".join(p_chains[-1]) #join all the chains together in the subtitle
+
+        print(chains_title) #print the chains present
+        
     # loop through the protein chains to extract sequence information and secondary structure info
     for chain in p_chains: #using the list of chains obtained as the iteratable
         aminoacid_seq = "" #initialize a blank amino acid string
