@@ -39,14 +39,13 @@ def secondary_structure(path, filename):
 
         with open (path, "r") as myfile:
             for line in myfile:
-
+                
                 sp_line = line.split() #split line
-
                 if line.startswith("SEQRES") and chain == sp_line[2]:
 
                     for amino in sp_line[4:]:
                         if len(amino)==3:
-                            amino1_letter = aminoacids_dict.get(amino)
+                            amino1_letter = aminoacids_dict.get(amino, "X") #if 3 letter code not in dictionary give it X
                             aminoacid_seq.append(amino1_letter)
                             sec_structure.append("-")
                             sec_type.append(" ")
@@ -61,47 +60,33 @@ def secondary_structure(path, filename):
                     #helix_length = sp_line[10]
                     #print(helix_length)
                     helix_sec = []
-                    for i in range(int(sp_line[8])-int(sp_line[5])+1):
+                    for i in range(int(line[33:37])-int(line[21:25])+1):
                         helix_sec.append("/") # create the secondary helix structure
 
                     #replace the none structure with the helix structure on the specific index
-                    sec_structure[int(sp_line[5])-1:int(sp_line[8])] = helix_sec
+                    sec_structure[int(line[21:25])-1:int(line[33:37])] = helix_sec
 
                     #get the secondary structure ID and insert it on the right index
-                    if sp_line[1] == sp_line[2]:
-                        structure_id = str(sp_line[2]) 
-                        if len(structure_id) == 1:
-                            sec_type[int(sp_line[5])-1] = structure_id
-                        else:
-                            sec_type[int(sp_line[5])-1:int(sp_line[5])+len(structure_id)-1] = structure_id
+                    structure_id = str(sp_line[2])
+                    if len(structure_id) == 1:
+                        sec_type[int(line[21:25])-1] = structure_id
                     else:
-                        structure_id = str(sp_line[2])
-                        if len(structure_id) == 1:
-                            sec_type[int(sp_line[5])] = structure_id
-                        else:
-                            sec_type[int(sp_line[5])-1:int(sp_line[5])+len(structure_id)-1] = structure_id
+                        sec_type[int(line[21:25])-1:int(line[21:25])+len(structure_id)-1] = structure_id
 
                 if line.startswith("SHEET") and chain == sp_line[5]:
                     #sheet_length = sp_line[10]
                     #print(sheet_length)
                     sheet_sec = []
-                    for i in range(int(sp_line[9])-int(sp_line[6])+1):
+                    for i in range(int(line[33:37])-int(line[22:26])+1):
                         sheet_sec.append("|")
-                    #print(sec)
-                    sec_structure[int(sp_line[6])-1:int(sp_line[9])] = sheet_sec
+                    #print(sheet_sec)
+                    sec_structure[int(line[22:26])-1:int(line[33:37])] = sheet_sec
 
-                    if len(sp_line[2]) > 1:
-                        structure_id = str(sp_line[2])
-                        if len(structure_id) == 1:
-                            sec_type[int(sp_line[6])-1] = structure_id
-                        else:
-                            sec_type[int(sp_line[6])-1:int(sp_line[6])+len(structure_id)-1] = structure_id
+                    structure_id = str(sp_line[1]) + str(sp_line[2]) #Strand and sheet ID
+                    if len(structure_id) == 1:
+                        sec_type[int(line[22:26])-1] = structure_id
                     else:
-                        structure_id = str(sp_line[1]) + str(sp_line[2])
-                        if len(structure_id) == 1:
-                            sec_type[int(sp_line[6])-1] = structure_id
-                        else:
-                            sec_type[int(sp_line[6])-1:int(sp_line[6])+len(structure_id)-1] = structure_id
+                        sec_type[int(line[22:26])-1:int(line[22:26])+len(structure_id)-1] = structure_id
 
 
             chain_count = "(" + str(p_chains.count(chain)) + ")"
@@ -110,44 +95,8 @@ def secondary_structure(path, filename):
             print("Chain", chain)
             print(chain_count)
 
-            count = 0
-            for amino in range(len(aminoacid_seq)+1):
-                count+= 1
-                if count == 80:
-                    aaline = aminoacid_seq[:80]
-                    secline = sec_structure[:80]
-                    sec_typeline = sec_type[:80]
-
-                    aaline = "".join(aaline)
-                    secline = "".join(secline)
-                    sctline = "".join(sec_typeline)
-                    count = 0
-
-                    print(aaline)
-                    print(secline)
-                    print(sctline)
-                    print("\n")
-
-                    del aminoacid_seq[0:80]
-                    del sec_structure[0:80]
-                    del sec_type[0:80]
-
-                if len(aminoacid_seq) < 80:
-                    aaline = aminoacid_seq[:]
-                    secline = sec_structure[:]
-                    sec_typeline = sec_type[:]
-
-                    aaline = "".join(aaline)
-                    secline = "".join(secline)
-                    sctline = "".join(sec_typeline)
-                    count = 0
-
-                    print(aaline)
-                    print(secline)
-                    print(sctline)
-
-                    break
-
-            print(length)
-            print("\n")
+            count = 80
+            for i in range(0,len(aminoacid_seq),count):
+                print("".join(aminoacid_seq)[i: i + count] + "\n" + "".join(sec_structure)[i: i + count] + "\n" + "".join(sec_type)[i: i + count])
+                print("\n")
         
