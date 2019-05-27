@@ -55,7 +55,7 @@ def mainframe(opt,pdb):
         if opt == 'I' or opt == 'H' or opt == 'S' or opt == 'X' or opt == 'Q':
             if pdb == "None":
                 if opt == 'Q':
-                    exitloop()
+                    exitloop(pdb)
                 else:
                     print("There is no file loaded, do you want to load a file?")
                     new = input("Y/N: ")
@@ -95,7 +95,7 @@ def mainframe(opt,pdb):
                     pdb_export(path)
                     menuscreen(pdb)
                 if opt == 'Q':
-                    exitloop() #exit function
+                    exitloop(pdb) #exit function
         else:
             print("Invalid option entered")
             menuscreen(pdb)
