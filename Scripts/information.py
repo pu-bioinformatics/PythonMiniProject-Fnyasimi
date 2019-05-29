@@ -1,5 +1,7 @@
 #! /bin/python
 
+"""The module conntains the function used to extract the pdb information from a pdb file"""
+
 def pdb_info(path,pdb):
     
     """The function is used to display the pdb protein file information including title, chains, number of helices,
