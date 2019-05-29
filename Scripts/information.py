@@ -1,6 +1,6 @@
 #! /bin/python
 
-def pdb_info(path):
+def pdb_info(path,pdb):
     
     """The function is used to display the pdb protein file information including title, chains, number of helices,
     number of sheets and the amino acid sequence of the protein.
@@ -36,6 +36,7 @@ def pdb_info(path):
 
         # creating the title and formating it
         print("\n")
+        print("PDB File: %s"%pdb)
         main_head = "Title: "
         titlelist = []
         len_main_head = len(main_head)
@@ -90,13 +91,13 @@ def pdb_info(path):
                     sheet_count += 1
 
             # Creating legends
-            aminoacids_count ="      Number of "+ typec + (" "*(6-(len(str(aa_count.get(chain)))))) + str(aa_count.get(chain))
-            helixcount = "      Number of helix:" + (" "*(len(aminoacids_count) - 22 - len(str(helix_count)))) + str(helix_count)
-            sheetcount = "      Number of sheet:" + (" "*(len(aminoacids_count) - 22 - len(str(sheet_count)))) + str(sheet_count)
+            aminoacids_count ="      Number of "+ typec + "%6d" %int(aa_count.get(chain))
+            helixcount = "      Number of helix:" + "%12d" %int(helix_count)
+            sheetcount = "      Number of sheet:" + "%12d" %int(sheet_count)
 
             #format the sequence paragraph split the lines to the length of 50
             linelist = []
-            s_title = "      Sequence: "
+            s_title = "      Sequence:  "
             len_s_title = len(s_title)
             for i in range(0,len(aminoacid_seq),50):
                 ln = (" "*len_s_title)+ aminoacid_seq[i:i+50]
