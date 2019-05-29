@@ -1,5 +1,6 @@
 #! /bin/python
 
+"""The module contains the function that is used to produce anini acid histograms"""
 
 def aminoacid_histogram(path):
     """This is a fuction used to draw histograms of the number of amino acids present in a seqience of 
@@ -27,16 +28,13 @@ def aminoacid_histogram(path):
                 sp_line = line.split() #split line
                 for amino in sp_line[4:]:
                     amino_acids.append(amino)
-        #print(amino_acids)
-        #print(len(amino_acids))
         
-        for amino in amino_acids:
+        for amino in amino_acids: #count amino acids
             if amino not in aminoacids_count.keys():
                 amino_total = amino_acids.count(amino)
                 aminoacids_count[amino]=amino_total
             else:
                 pass
-        #print(aminoacids_count)
         
     if order == 'an' or order == 'dn' or order == 'aa' or order == 'da':
 
@@ -45,7 +43,7 @@ def aminoacid_histogram(path):
                 stars = ''
                 for i in range(aminoacids_count.get(amino)):
                     stars+='*'
-                line = "    " + amino + " " + "(" + (" " * (3 - len(str(aminoacids_count.get(amino))))) + str(aminoacids_count.get(amino)) + ")  : " + stars
+                line = "    %s (%3d) : %s" %(amino, int(aminoacids_count.get(amino)), stars)
                 print(line)
 
         if order == 'da': #alphabetically - descending
@@ -60,7 +58,7 @@ def aminoacid_histogram(path):
                 stars = ''
                 for i in range(aminoacids_count.get(amino)):
                     stars+='*'
-                line = "    " + amino + " " + "(" + (" " * (3 - len(str(aminoacids_count.get(amino))))) + str(aminoacids_count.get(amino)) + ")  : " + stars
+                line = "    %s (%3d) : %s" %(amino, int(aminoacids_count.get(amino)), stars)
                 print(line)
 
         if order == 'an': #number of amino acids - ascending
@@ -74,7 +72,7 @@ def aminoacid_histogram(path):
                 stars = ''
                 for i in range(aminoacids_count.get(amino)):
                     stars+='*'
-                line = "    " + amino + " " + "(" + (" " * (3 - len(str(aminoacids_count.get(amino))))) + str(aminoacids_count.get(amino)) + ")  : " + stars
+                line = "    %s (%3d) : %s" %(amino, int(aminoacids_count.get(amino)), stars)
                 print(line)
 
         if order == 'dn': # number of amino acids - descending
@@ -89,10 +87,10 @@ def aminoacid_histogram(path):
                 stars = ''
                 for i in range(aminoacids_count.get(amino)):
                     stars+='*'
-                line = "    " + amino + " " + "(" + (" " * (3 - len(str(aminoacids_count.get(amino))))) + str(aminoacids_count.get(amino)) + ")  : " + stars
+                line = "    %s (%3d) : %s" %(amino, int(aminoacids_count.get(amino)), stars)
                 print(line)
                 
     else:
-        print("   Invalid option")
-        aminoacid_histogram()
+        print("Invalid option")
+        aminoacid_histogram(path)
         
