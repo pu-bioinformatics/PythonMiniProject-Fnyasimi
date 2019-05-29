@@ -1,5 +1,7 @@
 #! /bin/python
 
+"""The module contain the function to enable a user export the pdb file to a different folder with a new name."""
+
 def pdb_export(path):
     """This function exports the current loaded pdb file into a new file in the defined path.
     Arguments: User inputs path and the new pdb filename"""
@@ -14,10 +16,10 @@ def pdb_export(path):
     directory = "/".join(out_path1[:-1])
     filename = out_path1[-1]
 
+    name_tag = False
     # Checking if path exists
     if os.path.isdir(directory):
-
-        name_tag = False
+ 
         extension = filename.split(".")
 
         if len(extension) == 1: # checking if the extention is included
@@ -26,10 +28,10 @@ def pdb_export(path):
             name_tag = True
 
         else:
-            if len(extension) == 2 and extension[-1] == 'pdb': # confirm right naming
+            if len(extension) == 2 and extension[-1] == 'pdb': # confirm right extension name
                 name_tag = True
             else:
-                print("Check your output filename and rename it appropriately")
+                print("Check your output filename extension and name it appropriately")
                 pdb_export(path)
 
         if name_tag:
@@ -38,7 +40,7 @@ def pdb_export(path):
 
                 pdbfile = open(path,"r")
                 for line in pdbfile:
-                    myfile.write(line)
+                    myfile.write(line) # write to new file
 
                 pdbfile.close() 
 
