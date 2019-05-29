@@ -1,8 +1,13 @@
 #! /bin/python
 
-def filecheck ():
+"""The module contains the function which checks if the file exists and loads it for analysis"""
+
+def filecheck(pdb):
     
-    global pdb,path,filename
+    """The main file loader function for the pdb explorer.
+    Prompts the user to input the path to the pdb file. It checks if the path is correct and if the file exists.
+    If all are correct its accepted
+    Arguments: pdb for udating the current file otherwise unchanged."""
     
     import os # os is used to check if path and files are true
     
@@ -18,25 +23,25 @@ def filecheck ():
         if os.path.isfile(path):
             myfile = open(path,"r")
             line_1 = myfile.readline()
+            lastline = myfile.readlines()[-1]
             myfile.close()
-            if line_1.startswith("HEADER"):
+            #all pdb files start with header and have a length of 81 and lastline starts with end
+            if line_1.startswith("HEADER") and len(line_1) == 81 and lastline.startswith("END"): 
                 print("The File %s has been successfully loaded" %filename)
                 pdb = filename # reassign the name of the pdb file to update on menu screen
             
             else:
                 print("This is not a pdb file")
-                pdb = "None"
+                
         else:
             extension = filename.split(".")
             if extension[-1] == 'pdb':
                 print("The File %s does not exist" %filename)
-                pdb = "None"
+                
             else:
                 print("The File %s is not a pdb file" %filename)
-                pdb = "None"
+                
     else:
         print("The directory does not exist ")
-        pdb = "None"
-    
-    
-    return pdb, path, filename
+     
+    return pdb, path

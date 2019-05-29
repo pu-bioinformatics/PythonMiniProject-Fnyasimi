@@ -1,6 +1,6 @@
 #! /bin/python
 
-# Required modules
+"""The module contains a function that controls the function of the pdb explorer ensuring a pdb file should be present for different options to work"""
 
 def mainframe(opt,pdb):
     """
@@ -8,7 +8,7 @@ def mainframe(opt,pdb):
     Arguments: opt (short form for selected option).
     If the option does not exist it returns to the menu screen"""
     
-    global path, filename
+    global pdb,path
     
     #Import required modules
     from menu import menuscreen
@@ -21,8 +21,7 @@ def mainframe(opt,pdb):
     
     if opt == 'O': # Open file
         if pdb == "None": # No loaded pdb file
-            pdb, path, filename = filecheck() # Load file
-            #pdb, path, filename = filecheck()
+            pdb, path = filecheck(pdb) # Load file
             menuscreen(pdb)
 
         else: # If there is a loaded file you want to replace 
@@ -31,7 +30,7 @@ def mainframe(opt,pdb):
             replace = replace.upper()
             
             if replace == 'Y':
-                pdb, path, filename = filecheck()
+                pdb, path = filecheck(pdb)
                 menuscreen(pdb)
             
             if replace == 'N':
@@ -46,11 +45,12 @@ def mainframe(opt,pdb):
                     replace = replace.upper()
 
                     if replace == 'Y':
-                        pdb, path, filename = filecheck()
+                        pdb, path = filecheck(pdb)
                         menuscreen(pdb)
                         
                     if replace == 'N':
                         menuscreen(pdb)
+                    
     else:
         if opt == 'I' or opt == 'H' or opt == 'S' or opt == 'X' or opt == 'Q':
             if pdb == "None":
@@ -62,7 +62,7 @@ def mainframe(opt,pdb):
                     new = new.upper()
                     
                     if new == 'Y':
-                        pdb, path, filename = filecheck()
+                        pdb, path = filecheck(pdb)
                         menuscreen(pdb)
                     if new == 'N':
                         menuscreen(pdb)
@@ -76,20 +76,21 @@ def mainframe(opt,pdb):
                             new = new.upper()
 
                             if new == 'Y':
-                                pdb, path, filename = filecheck()
+                                pdb, path = filecheck(pdb)
                                 menuscreen(pdb)
 
                             if new == 'N':
                                 menuscreen(pdb)
+                        
             else:
                 if opt == 'I':
-                    pdb_info(path) # Information function
+                    pdb_info(path,pdb) # Information function
                     menuscreen(pdb)
                 if opt == 'H':
                     aminoacid_histogram(path) # amino histogram function
                     menuscreen(pdb)
                 if opt == 'S':
-                    secondary_structure(path, filename) # Show secondary structure of a protein
+                    secondary_structure(path, pdb) # Show secondary structure of a protein
                     menuscreen(pdb)
                 if opt == 'X':
                     pdb_export(path)
