@@ -1,14 +1,13 @@
 #! bin/python
 
-
+"""This module contains the function that is used to print the menu screen and call the mainframe"""
 
 def menuscreen(pdb):
     
     """
     Creates the main menu look with all the available options which the program can take.
-    Prompts the user to select an option from the available options in the Menu."""
-    
-    #global opt
+    Prompts the user to select an option from the available options in the Menu.
+    Argument: pdb file to update it when file is changed"""
     
     #Required module
     from mainframe import mainframe
@@ -39,6 +38,7 @@ def menuscreen(pdb):
     ln12 = ("     "+"*"+(" "*78)+"*")
     ln13 = ("     "+"*"+(" "*(80-len(i)-len(pdb)-3))+i+pdb+" *")
     ln14 = ("     "+("*"*80))
+
     
     lines = [ln1,ln2,ln3,ln4,ln5,ln6,ln7,ln8,ln9,ln10,ln11,ln12,ln13,ln14]
     

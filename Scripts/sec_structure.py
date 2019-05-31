@@ -6,7 +6,9 @@ def secondary_structure(path, pdb):
     """The function shows the secondary structure and which amino acids belong to a certain helix
     and the helix ID.
     The function only  works with proteins that are not bound to macromolecules or ligands, 
-    works with continuous amino acids in a protein"""
+    works with continuous amino acids in a protein
+    Arguments: path - where file is located
+               pdb - the loaded pdb file name"""
     
     # Create a dictionary with the 3 letter code as key and the ambiguous code as value
     aminoacids_dict = {'ALA':'A','ARG':'R','ASN':'N','ASP':'D','CYS':'C','GLU':'E','GLN':'Q','GLY':'G','HIS':'H',
@@ -31,7 +33,7 @@ def secondary_structure(path, pdb):
                     aa_count[chain]= int(seq_line[3]) #select the count of amino acids in each chain and save to amino acid count
 
         extension = pdb.split(".")
-        print("Secondary Structure of the PDB id %s:" %str.upper(extension[0]))
+        print("     Secondary Structure of the PDB id %s:" %str.upper(extension[0]))
 
         for chain in p_chains: #using the list of chains obtained as the iteratable
             aminoacid_seq = [] #initialize a blank amino acid list
@@ -58,8 +60,6 @@ def secondary_structure(path, pdb):
 
 
                 if line.startswith("HELIX") and chain == sp_line[4]:
-                    #helix_length = sp_line[10]
-                    #print(helix_length)
                     helix_sec = []
                     for i in range(int(line[33:37])-int(line[21:25])+1):
                         helix_sec.append("/") # create the secondary helix structure
@@ -75,8 +75,6 @@ def secondary_structure(path, pdb):
                         sec_type[int(line[21:25])-1:int(line[21:25])+len(structure_id)-1] = structure_id
 
                 if line.startswith("SHEET") and chain == sp_line[5]:
-                    #sheet_length = sp_line[10]
-                    #print(sheet_length)
                     sheet_sec = []
                     for i in range(int(line[33:37])-int(line[22:26])+1):
                         sheet_sec.append("|")
@@ -93,15 +91,17 @@ def secondary_structure(path, pdb):
             chain_count = "(" + str(p_chains.count(chain)) + ")"
             length = "(" + str(len(aminoacid_seq)) + ")"
 
-            print("Chain %s:" %chain)
-            print(chain_count)
+            print("     Chain %s:" %chain)
+            print("     " + chain_count)
 
             count = 80
             for i in range(0,len(aminoacid_seq),count):
-                print("".join(aminoacid_seq)[i: i + count] + "\n" + "".join(sec_structure)[i: i + count] + "\n" + "".join(sec_type)[i: i + count])
-                #print("\n")
+                print("     " + "".join(aminoacid_seq)[i: i + count] + "\n" + \
+                      "     " + "".join(sec_structure)[i: i + count] + "\n" + \
+                      "     " + "".join(sec_type)[i: i + count])
+
                 if i == (len(aminoacid_seq)//80)*80:
-                    print(length)
+                    print("     " + length)
                 else:
                     print("\n")
             print("\n")

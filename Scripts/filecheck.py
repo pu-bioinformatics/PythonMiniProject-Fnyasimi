@@ -11,7 +11,7 @@ def filecheck(pdb):
     
     import os # os is used to check if path and files are true
     
-    path = input ("Enter a Valid PATH for a PDB File: ")
+    path = input ("     Enter a Valid PATH for a PDB File: ")
     
     # Split the path to obtain the file directory and file name
     path1 = path.split("/")
@@ -27,21 +27,21 @@ def filecheck(pdb):
             myfile.close()
             #all pdb files start with header and have a length of 81 and lastline starts with end
             if line_1.startswith("HEADER") and len(line_1) == 81 and lastline.startswith("END"): 
-                print("The File %s has been successfully loaded" %filename)
+                print("     The File %s has been successfully loaded" %filename)
                 pdb = filename # reassign the name of the pdb file to update on menu screen
             
             else:
-                print("This is not a pdb file")
+                print("     This is not a pdb file")
                 
         else:
             extension = filename.split(".")
             if extension[-1] == 'pdb':
-                print("The File %s does not exist" %filename)
+                print("     The File %s does not exist" %filename)
                 
             else:
-                print("The File %s is not a pdb file" %filename)
+                print("     The File %s is not a pdb file" %filename)
                 
     else:
-        print("The directory does not exist ")
+        print("     The directory does not exist ")
      
     return pdb, path

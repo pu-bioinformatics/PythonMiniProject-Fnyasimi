@@ -1,5 +1,7 @@
 #! /bin/python
 
+"""The module contains the function which is used to exit the pdb explorer."""
+
 def exitloop(pdb):
     """
     The function is used when the user wants to exit the program.
@@ -9,22 +11,21 @@ def exitloop(pdb):
     
     from menu import menuscreen
     
-    exit = input("Do you want to exit(E) or do you want go back to the menu (M): ")
+    exit = input("     Do you want to exit(E) or do you want go back to the menu (M): ")
     exit = exit.upper()
-    
     if exit == 'M':
-        menuscreen(pdb)
+	    menuscreen(pdb)
     if exit == 'E':
-        print("Thank you the pdb file explorer has exited.") 
-    if exit != 'M' and exit != 'E':
-        exit = input("Do you want to exit(E) or do you want go back to the menu (M): ")
-        exit = exit.upper()
-        while exit != 'M' and exit != 'E':
+        print("     Thank you for using the pdb file explorer.")
 
-            exit = input("Do you want to exit(E) or do you want go back to the menu (M): ")
+    if exit != 'M' and exit != 'E':
+        exit = input("     Do you want to exit(E) or do you want go back to the menu (M): ")
+        exit = exit.upper() 
+    
+        while exit != 'M' and exit != 'E':
+            exit = input("     Do you want to exit(E) or do you want go back to the menu (M): ")
             exit = exit.upper()
             if exit == 'M':
                 menuscreen(pdb)
             if exit == 'E':
-                print("Thank you the pdb file explorer has exited.")       
-      
+                print("     Thank you for using the pdb file explorer.")

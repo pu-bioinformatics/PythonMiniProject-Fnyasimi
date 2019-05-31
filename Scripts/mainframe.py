@@ -8,7 +8,7 @@ def mainframe(opt,pdb):
     Arguments: opt (short form for selected option).
     If the option does not exist it returns to the menu screen"""
     
-    global pdb,path
+    global path
     
     #Import required modules
     from menu import menuscreen
@@ -25,8 +25,8 @@ def mainframe(opt,pdb):
             menuscreen(pdb)
 
         else: # If there is a loaded file you want to replace 
-            print("File %s is loaded, do you want to replace the file?" %pdb)
-            replace = input("Y/N: ")
+            print("     File %s is loaded, do you want to replace the file?" %pdb)
+            replace = input("     Y/N: ")
             replace = replace.upper()
             
             if replace == 'Y':
@@ -37,11 +37,11 @@ def mainframe(opt,pdb):
                 menuscreen(pdb)
             
             if replace != 'Y' and replace != 'N':
-                replace = input("Invalid option please input Y/N: ")
+                replace = input("     Invalid option please input Y/N: ")
                 replace = replace.upper()
                 
                 while replace != 'Y' and replace != 'N':
-                    replace = input("Invalid option please input Y/N: ")
+                    replace = input("     Invalid option please input Y/N: ")
                     replace = replace.upper()
 
                     if replace == 'Y':
@@ -57,8 +57,8 @@ def mainframe(opt,pdb):
                 if opt == 'Q':
                     exitloop(pdb)
                 else:
-                    print("There is no file loaded, do you want to load a file?")
-                    new = input("Y/N: ")
+                    print("     There is no file loaded, do you want to load a file?")
+                    new = input("     Y/N: ")
                     new = new.upper()
                     
                     if new == 'Y':
@@ -68,11 +68,11 @@ def mainframe(opt,pdb):
                         menuscreen(pdb)
                         
                     if new != 'Y' and new != 'N':
-                        new = input("Invalid option please input Y/N: ")
+                        new = input("     Invalid option please input Y/N: ")
                         new = new.upper()
                 
                         while new != 'Y' and new != 'N':
-                            new = input("Invalid option please input Y/N: ")
+                            new = input("     Invalid option please input Y/N: ")
                             new = new.upper()
 
                             if new == 'Y':
@@ -98,5 +98,5 @@ def mainframe(opt,pdb):
                 if opt == 'Q':
                     exitloop(pdb) #exit function
         else:
-            print("Invalid option entered")
+            print("     Invalid option entered")
             menuscreen(pdb)

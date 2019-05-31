@@ -9,20 +9,15 @@ functions such as ;
         -Show a histogram of the amino acids present
         -Export the pdb file
         -Quit the program
-        """
+        
+Prepared by Festus Nyasimi
+"""
 
 # Start with no pdb file
 pdb = "None"
 
-#import all the modules
+#import the  start module
 from menu import menuscreen
-from mainframe import mainframe
-from filecheck import filecheck
-from information import pdb_info
-from histogram import aminoacid_histogram
-from sec_structure import secondary_structure
-from export import pdb_export
-from exitloop import exitloop
 
 # Start the program by executing the menuscreen function
 menuscreen(pdb)

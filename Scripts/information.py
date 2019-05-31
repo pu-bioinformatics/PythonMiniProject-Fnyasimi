@@ -1,6 +1,6 @@
 #! /bin/python
 
-"""The module conntains the function used to extract the pdb information from a pdb file"""
+"""The module contains the function used to extract the pdb information from a pdb file"""
 
 def pdb_info(path,pdb):
     
@@ -8,7 +8,7 @@ def pdb_info(path,pdb):
     number of sheets and the amino acid sequence of the protein.
     Arguments : the path to the pdb file."""
 
-    global typec # distinguish between amino acids and nucleotide
+    global typec # distinguish between amino acids and nucleotides
 
     # Creating an amino acid dictionary with the 3 letter code as key and the ambiguous code as value
     aminoacids_dict = {'ALA':'A','ARG':'R','ASN':'N','ASP':'D','CYS':'C','GLU':'E','GLN':'Q','GLY':'G','HIS':'H',
@@ -16,7 +16,6 @@ def pdb_info(path,pdb):
                   'TYR':'Y','VAL':'V'}
 
     with open (path, "r") as myfile: # open pdb file
-        
         p_chains = [] # type of chains in the protein
         aa_count = {} # number of amino acids in each chain
         header = "" # initialize the header
@@ -28,7 +27,6 @@ def pdb_info(path,pdb):
                 header = header + " ".join(head[1:])
 
             if line.startswith("SEQRES"):
-                
                 seq_line = line.split() #split the line into fields 
                 chain = seq_line[2] #select the chains from the respective column
 
@@ -38,12 +36,12 @@ def pdb_info(path,pdb):
 
         # creating the title and formating it
         print("\n")
-        print("PDB File: %s"%pdb)
-        main_head = "Title: "
+        print("     PDB File: %s"%pdb)
+        main_head = "     Title: "
         titlelist = []
         len_main_head = len(main_head)
         for i in range(0,len(header),74):
-            ln = (" "*len_main_head)+ header[i:i+74]
+            ln =(" "*len_main_head) + header[i:i+74]
             titlelist.append(ln)
 
         line1 = titlelist[0]
@@ -55,22 +53,21 @@ def pdb_info(path,pdb):
             print(line)
         
         if len(p_chains) <= 2:
-            chains_title = "CHAINS: " + " and ".join(p_chains) #join all the chains together in the subtitle
+            chains_title = "     CHAINS: " + " and ".join(p_chains) #join all the chains together in the subtitle
 
         else:
-            chains_title = "CHAINS: " + ", ".join(p_chains[:-1])
+            chains_title = "     CHAINS: " + ", ".join(p_chains[:-1])
             chains_title = chains_title + " and " + "".join(p_chains[-1]) #join all the chains together in the subtitle
 
         print(chains_title) #print the chains present
         
-    # loop through the protein chains to extract sequence information and secondary structure info
-    for chain in p_chains: #using the list of chains obtained as the iteratable
-        aminoacid_seq = "" #initialize a blank amino acid string
-        helix_count = 0 #initialize helix counter
-        sheet_count = 0 #initialize sheet counter
-        
-
-        with open (path, "r") as myfile:
+        # loop through the protein chains to extract sequence information and secondary structure info
+        for chain in p_chains: #using the list of chains obtained as the iteratable
+            aminoacid_seq = "" #initialize a blank amino acid string
+            helix_count = 0 #initialize helix counter
+            sheet_count = 0 #initialize sheet counter
+            myfile.seek(0)
+            
             for line in myfile:
                 sp_line = line.split() #split line
 
@@ -111,9 +108,9 @@ def pdb_info(path,pdb):
             line1 = "".join(line1) #join it
             linelist[0] = line1 #add it back to the list
 
-            print(" - "+ "Chain "+ chain)
-            print(aminoacids_count)
-            print(helixcount)
-            print(sheetcount)
+            print("      - "+ "Chain "+ chain)
+            print("   " + aminoacids_count)
+            print("   " + helixcount)
+            print("   " + sheetcount)
             for line in linelist:
-                print(line)
+                print("   " + line)

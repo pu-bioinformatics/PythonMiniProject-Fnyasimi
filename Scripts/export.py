@@ -8,8 +8,8 @@ def pdb_export(path):
     
     import os
     out_path = input ("""
-    Enter a Valid PATH to where you want to export the file and the new filename.pdb 
-    :""")
+     Enter a Valid PATH to where you want to export the file and the new filename.pdb 
+     :""")
 
     # Split the path to obtain the file directory and new filename
     out_path1 = out_path.split("/")
@@ -31,7 +31,7 @@ def pdb_export(path):
             if len(extension) == 2 and extension[-1] == 'pdb': # confirm right extension name
                 name_tag = True
             else:
-                print("Check your output filename extension and name it appropriately")
+                print("     Check your output filename extension and name it appropriately")
                 pdb_export(path)
 
         if name_tag:
@@ -44,7 +44,7 @@ def pdb_export(path):
 
                 pdbfile.close() 
 
-                print("Successfully exported the pdb file to %s" %out_path)
+                print("     Successfully exported the pdb file to %s" %out_path)
 
     else:
-        print("The directory does not exist ")
+        print("     The directory does not exist ")
